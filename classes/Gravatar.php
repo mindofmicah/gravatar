@@ -9,7 +9,7 @@ class Gravatar
 	const SIZE_MIN = 1;
 	const SIZE_MAX = 2048;
 
-	protected $rating, $size;
+	protected $rating, $size, $isForceDefaultEnabled, $isSecure;
 
 	public function process($input)
 	{
@@ -40,4 +40,14 @@ class Gravatar
 		}
 		$this->size = $new_size;
 	}
+
+	public function setIsForceDefaultEnabled($new_value)
+	{
+		$this->isForceDefaultEnabled = !!$new_value;
+	}
+
+	public function setIsSecure($new_value)
+	{
+		$this->isSecure = !!$new_value;
+	}	
 }
