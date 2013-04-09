@@ -82,7 +82,7 @@ class GravatarTest extends PHPUnit_Framework_TestCase
 	public function testSetSizeInvalidValues()
 	{
 		$inputs = array(
-			'asdf', -5, 2041
+			'asdf', -5, 2049
 		);
 		$gravatar = new Gravatar();
 
@@ -95,7 +95,7 @@ class GravatarTest extends PHPUnit_Framework_TestCase
 
 				continue;
 			}
-			$this->fail('Should have thrown an exception');		
+			$this->fail($input . ' Should have thrown an exception');		
 		}
 	}
 }
