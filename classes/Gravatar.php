@@ -6,7 +6,10 @@ class Gravatar
 	const RATING_R = 'r';
 	const RATING_X = 'x';
 
-	protected $rating;
+	const SIZE_MIN = 1;
+	const SIZE_MAX = 2048;
+
+	protected $rating, $size;
 
 	public function process($input)
 	{
@@ -27,5 +30,14 @@ class Gravatar
 	{
 		$gravatar = new Gravatar();
 		return $gravatar->process($input);
+	}
+
+	public function setSize($new_size)
+	{
+		$new_size = intval($new_size);
+		if ($new_size < self::SIZE_MIN || $new_size > self::SIZE_MAX) {
+			throw new Exception('This value is outside of the available range');
+		}
+		$this->size = $new_size;
 	}
 }
