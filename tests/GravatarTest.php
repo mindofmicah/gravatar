@@ -66,6 +66,34 @@ class GravatarTest extends PHPUnit_Framework_TestCase
 			$this->fail('Should have thrown an exception');
 		}
 	}
+
+	public function testSetSizeValidValue()
+	{
+		$inputs = array(
+			1, 45, 2048
+		);
+
+		$gravatar = new MockGravatar();
+		foreach ($inputs as $input) {
+			$gravatar->setSize($input);
+			$this->assertEquals($input, $gravatar->size);
+		}
+	}
+	public function testSetSizeInvalidValues()
+	{
+		$inputs = array(
+			'asdf', -5, 2041
+		);
+		$gravatar = new Gravatar();
+		foreach ($inputs as $input) {
+			try {
+				$gravatar->setSize($input);
+				$this->fail('Should have thrown an exception');
+			} catch(Exception $e) {
+				continue;
+			}
+		}
+	}
 }
 
 class MockGravatar extends Gravatar
