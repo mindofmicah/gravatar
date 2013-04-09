@@ -98,6 +98,26 @@ class GravatarTest extends PHPUnit_Framework_TestCase
 			$this->fail($input . ' Should have thrown an exception');		
 		}
 	}
+
+	public function testSetForceDefault()
+	{
+		$gravatar = new MockGravatar();
+		$gravatar->setIsForceDefaultEnabled(1);
+		$this->assertTrue($gravatar->isForceDefaultEnabled);
+		$gravatar->setIsForceDefaultEnabled(0);
+		$this->assertFalse($gravatar->isForceDefaultEnabled);
+	}
+
+	public function testSetIsSecure()
+	{
+		$gravatar = new MockGravatar();
+		$gravatar->setIsSecure(1);
+		$this->assertTrue($gravatar->isSecure);
+		$gravatar->setIsSecure(0);
+		$this->assertFalse($gravatar->isSecure);
+	}
+
+
 }
 
 class MockGravatar extends Gravatar
