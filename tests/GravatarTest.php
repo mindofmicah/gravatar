@@ -117,7 +117,25 @@ class GravatarTest extends PHPUnit_Framework_TestCase
 		$this->assertFalse($gravatar->isSecure);
 	}
 
-
+	public function testSetDefaultImage()
+	{
+		$inputs = array(
+			'404' => '404',
+			'MM'=>'mm',
+			Gravatar::DEFAULT_IDENTICON => 'identicon',
+			'monsterid'                 => 'monsterid',
+			Gravatar::DEFAULT_WAVATAR   => 'wavatar',
+			Gravatar::DEFAULT_RETRO     => 'retro',
+			'blank'                     => 'blank',
+			'http://ninemilefilms.com/' => 'http%3A%2F%2Fninemilefilms.com%2F'
+		);
+		
+		$gravatar = new MockGravatar();
+		foreach ($inputs as $input => $expected) {
+			$gravatar->setDefaultImage($input);
+			$this->assertEquals($expected, $gravatar->defaultImage);
+		}
+	}
 }
 
 class MockGravatar extends Gravatar
