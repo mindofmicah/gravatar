@@ -2,23 +2,10 @@
 require 'classes/Gravatar.php';
 class GravatarTest extends PHPUnit_Framework_TestCase
 {
-	public function testBasicProcess()
-	{
-		$inputs = array(
-			'michaeleschbacher@gmail.com',
-			'MichaelEschbacher@gmail.com',
-			'MiChAeLeSCHBAcher@GMail.com'
-		);	
-		$expected_src = 'http://gravatar.com/avatar/561ccc0d8cbba335270496228d17864a.jpg';
-
-		$gravatar = new Gravatar();
-		foreach ($inputs as $input) {
-			$this->assertEquals($expected_src, $gravatar->process($input));
-		}
-	}
 
 	public function testQuickProcess()
 	{
+		$this->markTestSkipped('Will implement after the defaults functionality is in place');
 		$inputs = array(
 			'michaeleschbacher@gmail.com',
 			'MichaelEschbacher@gmail.com',
@@ -136,15 +123,15 @@ class GravatarTest extends PHPUnit_Framework_TestCase
 			$this->assertEquals($expected, $gravatar->defaultImage);
 		}
 	}
-	public function testBuildSrc()
+	public function testProcess()
 	{
-		$gravatar = new MockGravatar();
+		$gravatar = new Gravatar();
 		$gravatar->setRating('g');
 		$gravatar->setDefaultImage('404');
 		$gravatar->setIsForceDefaultEnabled(false);
 		$gravatar->setIsSecure(false);
 		$gravatar->setSize(80);
-		$this->assertEquals('http://gravatar.com/avatar/561ccc0d8cbba335270496228d17864a?d=404&s=80&r=g.jpg', $gravatar->buildSource('michaeleschbacher@gmail.com.com') );
+		$this->assertEquals('http://gravatar.com/avatar/561ccc0d8cbba335270496228d17864a?d=404&s=80&r=g.jpg', $gravatar->process('michaeleschbacher@gmail.com') );
 
 
 	$gravatar->setRating('r');
@@ -152,7 +139,7 @@ class GravatarTest extends PHPUnit_Framework_TestCase
 		$gravatar->setIsForceDefaultEnabled(true);
 		$gravatar->setIsSecure(true);
 		$gravatar->setSize(320);
-		$this->assertEquals('https://gravatar.com/avatar/561ccc0d8cbba335270496228d17864a?d=wavatar&s=320&r=r&f=y.jpg', $gravatar->buildSource('michaeleschbacher@gmail.com.com') );
+		$this->assertEquals('https://gravatar.com/avatar/561ccc0d8cbba335270496228d17864a?d=wavatar&s=320&r=r&f=y.jpg', $gravatar->process('michaeleschbacher@gmail.com') );
 
 
 
@@ -170,8 +157,4 @@ class MockGravatar extends Gravatar
 		$this->$param = $value;
 	}
 
-	public function buildSource($email)
-	{
-		return parent::buildSource($email);
-	}
 }

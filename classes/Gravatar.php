@@ -21,7 +21,18 @@ class Gravatar
 
 	public function process($input)
 	{
-		return 'http://gravatar.com/avatar/'. md5(strtolower($input)) . '.jpg';
+		$ret = '';
+		return sprintf(
+			'http%s://gravatar.com/avatar/%s?d=%s&s=%s&r=%s%s.jpg',
+			($this->isSecure ? 's' : ''),
+			md5(strtolower($input)),
+			$this->defaultImage,
+			$this->size,
+			$this->rating,
+			($this->isForceDefaultEnabled ? '&f=y' : '')
+		);
+	
+		return $ret;	
 	}
 
 	public function setRating($new_rating)
@@ -68,18 +79,4 @@ class Gravatar
 			$this->defaultImage = urlencode($new_default_image);
 		}
 	}
-	protected function buildSource($email)
-	{
-		$ret = '';
-		return sprintf(
-			'http%s://gravatar.com/avatar/561ccc0d8cbba335270496228d17864a?d=%s&s=%s&r=%s%s.jpg',
-			($this->isSecure ? 's' : ''),
-			$this->defaultImage,
-			$this->size,
-			$this->rating,
-			($this->isForceDefaultEnabled ? '&f=y' : '')
-		);
-	
-		return $ret;	
-	}	
 }
