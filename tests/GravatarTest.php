@@ -136,6 +136,27 @@ class GravatarTest extends PHPUnit_Framework_TestCase
 			$this->assertEquals($expected, $gravatar->defaultImage);
 		}
 	}
+	public function testBuildSrc()
+	{
+		$gravatar = new MockGravatar();
+		$gravatar->setRating('g');
+		$gravatar->setDefaultImage('404');
+		$gravatar->setIsForceDefaultEnabled(false);
+		$gravatar->setIsSecure(false);
+		$gravatar->setSize(80);
+		$this->assertEquals('http://gravatar.com/avatar/561ccc0d8cbba335270496228d17864a?d=404&s=80&r=g.jpg', $gravatar->buildSource('michaeleschbacher@gmail.com.com') );
+
+
+	$gravatar->setRating('r');
+		$gravatar->setDefaultImage('wavatar');
+		$gravatar->setIsForceDefaultEnabled(true);
+		$gravatar->setIsSecure(true);
+		$gravatar->setSize(320);
+		$this->assertEquals('https://gravatar.com/avatar/561ccc0d8cbba335270496228d17864a?d=wavatar&s=320&r=r&f=y.jpg', $gravatar->buildSource('michaeleschbacher@gmail.com.com') );
+
+
+
+	}
 }
 
 class MockGravatar extends Gravatar
@@ -147,5 +168,10 @@ class MockGravatar extends Gravatar
 	public function __set($param, $value)
 	{
 		$this->$param = $value;
+	}
+
+	public function buildSource($email)
+	{
+		return parent::buildSource($email);
 	}
 }

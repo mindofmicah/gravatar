@@ -67,5 +67,19 @@ class Gravatar
 		} else {
 			$this->defaultImage = urlencode($new_default_image);
 		}
+	}
+	protected function buildSource($email)
+	{
+		$ret = '';
+		return sprintf(
+			'http%s://gravatar.com/avatar/561ccc0d8cbba335270496228d17864a?d=%s&s=%s&r=%s%s.jpg',
+			($this->isSecure ? 's' : ''),
+			$this->defaultImage,
+			$this->size,
+			$this->rating,
+			($this->isForceDefaultEnabled ? '&f=y' : '')
+		);
+	
+		return $ret;	
 	}	
 }
