@@ -23,7 +23,7 @@ class Gravatar
 	{
 		$ret = '';
 		return sprintf(
-			'http%s://gravatar.com/avatar/%s?d=%s&s=%s&r=%s%s.jpg',
+			'http%s://gravatar.com/avatar/%s?d=%s&s=%s&r=%s%s',
 			($this->isSecure ? 's' : ''),
 			md5(strtolower($input)),
 			$this->defaultImage,

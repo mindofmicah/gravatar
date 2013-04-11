@@ -131,7 +131,7 @@ class GravatarTest extends PHPUnit_Framework_TestCase
 		$gravatar->setIsForceDefaultEnabled(false);
 		$gravatar->setIsSecure(false);
 		$gravatar->setSize(80);
-		$this->assertEquals('http://gravatar.com/avatar/561ccc0d8cbba335270496228d17864a?d=404&s=80&r=g.jpg', $gravatar->process('michaeleschbacher@gmail.com') );
+		$this->assertEquals('http://gravatar.com/avatar/561ccc0d8cbba335270496228d17864a?d=404&s=80&r=g', $gravatar->process('michaeleschbacher@gmail.com') );
 
 
 	$gravatar->setRating('r');
@@ -139,7 +139,7 @@ class GravatarTest extends PHPUnit_Framework_TestCase
 		$gravatar->setIsForceDefaultEnabled(true);
 		$gravatar->setIsSecure(true);
 		$gravatar->setSize(320);
-		$this->assertEquals('https://gravatar.com/avatar/561ccc0d8cbba335270496228d17864a?d=wavatar&s=320&r=r&f=y.jpg', $gravatar->process('michaeleschbacher@gmail.com') );
+		$this->assertEquals('https://gravatar.com/avatar/561ccc0d8cbba335270496228d17864a?d=wavatar&s=320&r=r&f=y', $gravatar->process('michaeleschbacher@gmail.com') );
 
 
 
